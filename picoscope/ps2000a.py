@@ -428,3 +428,13 @@ class PS2000a(_PicoscopeBase):
             c_enum(triggerType), c_enum(triggerSource),
             c_int16(0))
         self.checkResult(m)
+        
+    def _lowLevelSigGenSoftwareControl(self, state):
+        # This function causes a trigger event, or starts and stops gating
+        # state :   sets the trigger gate high or low when the signal generator
+        #           triggerType is set to either SIGGEN_GATE_HIGH or
+        #           SIGGEN_GATE_LOW. Ignored for other trigger types.
+        m = self.lib.ps2000aSigGenSoftwareControl(
+            c_int16(self.handle),
+            c_int16(state))
+        self.checkResult(m)
