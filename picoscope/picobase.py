@@ -779,6 +779,9 @@ class _PicoscopeBase(object):
         samplingFrequency = deltaPhase * self.AWGDACFrequency / \
                             2 ** (self.AWGPhaseAccumulatorSize - self.AWGBufferAddressWidth)
         return 1 / samplingFrequency
+    
+    def sigGenSoftwareControl(self, state):
+        self._lowLevelSigGenSoftwareControl(state)
 
     def setResolution(self, resolution):
         """For 5000-series scopes ONLY, sets the resolution. Error on other devices."""
